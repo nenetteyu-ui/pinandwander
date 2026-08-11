@@ -1,0 +1,30 @@
+# Local by Flywheel / WP Engine local dev files
+conf/
+logs/
+app/.envrc
+app/sql/
+
+# OS
+.DS_Store
+
+# WordPress core (reinstallable, not custom code)
+app/public/wp-admin/
+app/public/wp-includes/
+app/public/*.php
+app/public/wp-content/index.php
+app/public/wp-content/themes/twentytwentythree/
+app/public/wp-content/themes/twentytwentyfour/
+app/public/wp-content/themes/twentytwentyfive/
+app/public/wp-content/plugins/index.php
+app/public/license.txt
+app/public/readme.html
+
+# Sensitive / environment-specific
+app/public/wp-config.php
+
+# Uploaded media (large, host-managed)
+app/public/wp-content/uploads/
+
+# Cache / upgrade artifacts
+app/public/wp-content/upgrade/
+app/public/wp-content/cache/

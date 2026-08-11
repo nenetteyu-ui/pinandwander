@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Pin & Wander">
+  <rect x="0" y="0" width="100" height="100" rx="20" fill="#10231a"/>
+  <g transform="translate(15,18) scale(0.72)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="rotate(-20 50 55)"><path d="M20,55 A30,11 0 0 1 80,55" stroke="#c9a96e" stroke-width="2"/></g>
+    <g transform="rotate(24 50 55)"><path d="M22,55 A28,9 0 0 1 78,55" stroke="#c9a96e" stroke-width="1.7" opacity="0.7"/></g>
+    <circle cx="50" cy="55" r="19.5" fill="#10231a" stroke="none"/>
+    <circle cx="50" cy="55" r="19.5" stroke="#e8efe8" stroke-width="2.4"/>
+    <ellipse cx="50" cy="55" rx="7.8" ry="19.5" stroke="#e8efe8" stroke-width="1.6"/>
+    <ellipse cx="50" cy="55" rx="19.5" ry="6.3" stroke="#e8efe8" stroke-width="1.6"/>
+    <path d="M50,36 C44,29 41,27 41,23 A9,9 0 1 1 59,23 C59,27 56,29 50,36 Z" fill="#c9a96e" stroke="none"/>
+    <circle cx="50" cy="23" r="3.1" fill="#10231a" stroke="none"/>
+    <g transform="rotate(24 50 55)"><path d="M22,55 A28,9 0 0 0 78,55" stroke="#c9a96e" stroke-width="1.7" opacity="0.7"/></g>
+    <g transform="rotate(-20 50 55)">
+      <path d="M20,55 A30,11 0 0 0 80,55" stroke="#c9a96e" stroke-width="2"/>
+      <path d="M79.32,58.55 L73.58,66.56 L69.54,59.66 Z" fill="#c9a96e" stroke="none"/>
+    </g>
+  </g>
+</svg>
