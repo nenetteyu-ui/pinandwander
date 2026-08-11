@@ -36,7 +36,7 @@
                 <p class="trip-standfirst"><?php echo esc_html( get_the_excerpt() ); ?></p>
             <?php endif; ?>
 
-            <div class="trip-content">
+            <div class="prose">
                 <?php
                 the_content();
 

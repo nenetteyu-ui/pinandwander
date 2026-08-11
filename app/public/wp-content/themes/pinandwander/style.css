@@ -1462,7 +1462,7 @@ a.card-link { cursor: pointer; }
     text-align: center;
 }
 
-.trip-content {
+.prose {
     display: grid;
     grid-template-columns:
         [full-start] minmax(28px, 1fr)
@@ -1472,36 +1472,36 @@ a.card-link { cursor: pointer; }
         minmax(28px, 1fr) [full-end];
 }
 
-.trip-content > * {
+.prose > * {
     grid-column: content;
 }
 
-.trip-content > .alignwide { grid-column: wide; }
-.trip-content > .alignfull { grid-column: full; }
+.prose > .alignwide { grid-column: wide; }
+.prose > .alignfull { grid-column: full; }
 
-.trip-content > .alignfull img,
-.trip-content > .alignwide img {
+.prose > .alignfull img,
+.prose > .alignwide img {
     width: 100%;
 }
 
-.trip-content p,
-.trip-content ul,
-.trip-content ol {
+.prose p,
+.prose ul,
+.prose ol {
     font-size: 1.075rem;
     line-height: 1.85;
     color: var(--color-text);
     margin-bottom: 1.5em;
 }
 
-.trip-content ul,
-.trip-content ol {
+.prose ul,
+.prose ol {
     padding-left: 1.3em;
 }
 
-.trip-content li { margin-bottom: 0.5em; }
+.prose li { margin-bottom: 0.5em; }
 
-.trip-content h2,
-.trip-content h3 {
+.prose h2,
+.prose h3 {
     font-family: var(--font-serif);
     font-weight: 400;
     color: var(--color-dark);
@@ -1509,27 +1509,27 @@ a.card-link { cursor: pointer; }
     text-wrap: balance;
 }
 
-.trip-content h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); line-height: 1.15; }
-.trip-content h3 { font-size: clamp(1.3rem, 2.6vw, 1.6rem); line-height: 1.25; }
+.prose h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); line-height: 1.15; }
+.prose h3 { font-size: clamp(1.3rem, 2.6vw, 1.6rem); line-height: 1.25; }
 
-.trip-content a {
+.prose a {
     color: var(--color-warm-dk);
     text-decoration: underline;
     text-underline-offset: 3px;
 }
 
-.trip-content a:hover { color: var(--color-dark); }
+.prose a:hover { color: var(--color-dark); }
 
-.trip-content figure {
+.prose figure {
     margin: 3.2em 0;
 }
 
-.trip-content img {
+.prose img {
     display: block;
     height: auto;
 }
 
-.trip-content figcaption {
+.prose figcaption {
     font-size: 0.76rem;
     letter-spacing: 0.04em;
     color: var(--color-muted);
@@ -1537,7 +1537,7 @@ a.card-link { cursor: pointer; }
     text-align: center;
 }
 
-.trip-content blockquote {
+.prose blockquote {
     margin: 2.6em 0;
     padding-left: 26px;
     border-left: 2px solid var(--color-warm);
@@ -1548,7 +1548,7 @@ a.card-link { cursor: pointer; }
     color: var(--color-dark);
 }
 
-.trip-content blockquote p { font: inherit; color: inherit; }
+.prose blockquote p { font: inherit; color: inherit; }
 
 /* --- Article footer --- */
 .trip-footer {
@@ -1644,15 +1644,15 @@ a.card-link { cursor: pointer; }
 
     /* Not enough room for side tracks — one column, and let wide/full
        photos bleed to the screen edges instead. */
-    .trip-content {
+    .prose {
         display: block;
         max-width: 720px;
         margin: 0 auto;
         padding: 0 24px;
     }
 
-    .trip-content > .alignwide,
-    .trip-content > .alignfull {
+    .prose > .alignwide,
+    .prose > .alignfull {
         margin-left: -24px;
         margin-right: -24px;
     }
@@ -1661,6 +1661,155 @@ a.card-link { cursor: pointer; }
 @media (max-width: 560px) {
     .trip-hero { height: 60vh; min-height: 380px; }
     .trip-hero-content { padding-bottom: 44px; }
-    .trip-content figure { margin: 2.2em 0; }
+    .prose figure { margin: 2.2em 0; }
     .trip-related { margin-top: 64px; }
+}
+
+/* ============================================================
+   STATIC PAGES  (About, Work With Me, and anything else)
+   ============================================================ */
+.page {
+    padding-top: var(--nav-height);
+    padding-bottom: 96px;
+    background: var(--color-light);
+}
+
+.page-masthead {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 88px 28px 12px;
+}
+
+.page-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 5.6vw, 4rem);
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    color: var(--color-dark);
+    text-wrap: balance;
+}
+
+.page-dek {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.05rem, 2.1vw, 1.35rem);
+    line-height: 1.5;
+    color: var(--color-mid);
+    margin-top: 20px;
+}
+
+.page-portrait {
+    max-width: 940px;
+    margin: 56px auto 0;
+    padding: 0 28px;
+}
+
+.page-portrait img {
+    width: 100%;
+    height: auto;
+}
+
+.page-article {
+    padding-top: 60px;
+}
+
+/* --- Contact call to action --- */
+.contact-cta {
+    max-width: 780px;
+    margin: 88px auto 0;
+    padding: 64px 32px;
+    text-align: center;
+    background: var(--color-green);
+    color: var(--color-light);
+}
+
+.contact-cta-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--color-white);
+    text-wrap: balance;
+}
+
+.contact-cta-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgba(245, 243, 239, 0.82);
+    margin-top: 16px;
+}
+
+.contact-cta-btn {
+    margin-top: 32px;
+}
+
+.contact-email {
+    margin-top: 22px;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    color: rgba(245, 243, 239, 0.7);
+}
+
+.contact-email a {
+    border-bottom: 1px solid rgba(201, 169, 110, 0.5);
+    padding-bottom: 2px;
+}
+
+.contact-email a:hover {
+    color: var(--color-warm);
+}
+
+.contact-social {
+    margin-top: 44px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(245, 243, 239, 0.14);
+}
+
+.contact-social-label {
+    display: block;
+    font-size: 0.64rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-warm);
+    margin-bottom: 16px;
+}
+
+.contact-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+}
+
+.contact-social-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: rgba(245, 243, 239, 0.85);
+    transition: color var(--ease);
+}
+
+.contact-social-links a:hover {
+    color: var(--color-warm);
+}
+
+@media (max-width: 900px) {
+    .page-masthead { padding-top: 64px; }
+    .page-article { padding-top: 44px; }
+    .contact-cta { margin-top: 64px; padding: 48px 24px; }
+}
+
+/* Editor-only notice on a page with no content yet */
+.page-empty {
+    max-width: 720px;
+    margin: 48px auto 0;
+    padding: 36px 28px;
+    text-align: center;
+    border: 1px dashed rgba(0, 0, 0, 0.18);
+}
+
+.page-empty-text {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    margin-bottom: 20px;
 }
