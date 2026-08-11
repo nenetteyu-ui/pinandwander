@@ -1668,7 +1668,10 @@ a.card-link { cursor: pointer; }
 /* ============================================================
    STATIC PAGES  (About, Work With Me, and anything else)
    ============================================================ */
-.page {
+/* Scoped to .site-main on purpose: WordPress's body_class() puts a bare
+   "page" class on <body> for every Page (including a static front page),
+   so an unscoped .page rule would style the whole document. */
+.site-main.page {
     padding-top: var(--nav-height);
     padding-bottom: 96px;
     background: var(--color-light);
