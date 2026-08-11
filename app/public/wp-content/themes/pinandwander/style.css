@@ -1362,3 +1362,290 @@ a.card-link { cursor: pointer; }
     .journal-explorer { grid-template-columns: 1fr; padding: 0 16px; }
     .jmap-list { min-height: 0; }
 }
+
+/* ============================================================
+   SINGLE TRIP STORY
+   ============================================================ */
+.trip {
+    background: var(--color-light);
+    padding-bottom: 90px;
+}
+
+/* --- Hero --- */
+.trip-hero {
+    position: relative;
+    height: 78vh;
+    min-height: 460px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--color-dark);
+}
+
+.trip-hero.is-placeholder {
+    background: linear-gradient(150deg, #0c1c14 0%, #1d4a34 55%, #0c1c14 100%);
+}
+
+.trip-hero-media {
+    position: absolute;
+    inset: 0;
+}
+
+.trip-hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.trip-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 45%, rgba(0,0,0,0.34) 100%);
+}
+
+.trip-hero-content {
+    position: relative;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 28px 68px;
+    color: var(--color-white);
+}
+
+.trip-kicker {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-warm);
+    margin-bottom: 18px;
+}
+
+.trip-kicker:hover { color: var(--color-white); }
+
+.trip-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 6.4vw, 4.8rem);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    color: var(--color-white);
+    max-width: 16ch;
+    text-wrap: balance;
+}
+
+.trip-meta {
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+    margin-top: 20px;
+}
+
+/* --- Article body ---
+   A grid so photos can break out of the text column: the editor's
+   "Wide width" and "Full width" options land in the wider tracks. */
+.trip-article {
+    padding-top: 72px;
+}
+
+.trip-standfirst {
+    max-width: 720px;
+    margin: 0 auto 52px;
+    padding: 0 28px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+    line-height: 1.5;
+    color: var(--color-mid);
+    text-align: center;
+}
+
+.trip-content {
+    display: grid;
+    grid-template-columns:
+        [full-start] minmax(28px, 1fr)
+        [wide-start] minmax(0, 190px)
+        [content-start] minmax(0, 720px) [content-end]
+        minmax(0, 190px) [wide-end]
+        minmax(28px, 1fr) [full-end];
+}
+
+.trip-content > * {
+    grid-column: content;
+}
+
+.trip-content > .alignwide { grid-column: wide; }
+.trip-content > .alignfull { grid-column: full; }
+
+.trip-content > .alignfull img,
+.trip-content > .alignwide img {
+    width: 100%;
+}
+
+.trip-content p,
+.trip-content ul,
+.trip-content ol {
+    font-size: 1.075rem;
+    line-height: 1.85;
+    color: var(--color-text);
+    margin-bottom: 1.5em;
+}
+
+.trip-content ul,
+.trip-content ol {
+    padding-left: 1.3em;
+}
+
+.trip-content li { margin-bottom: 0.5em; }
+
+.trip-content h2,
+.trip-content h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    color: var(--color-dark);
+    margin: 2em 0 0.6em;
+    text-wrap: balance;
+}
+
+.trip-content h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); line-height: 1.15; }
+.trip-content h3 { font-size: clamp(1.3rem, 2.6vw, 1.6rem); line-height: 1.25; }
+
+.trip-content a {
+    color: var(--color-warm-dk);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.trip-content a:hover { color: var(--color-dark); }
+
+.trip-content figure {
+    margin: 3.2em 0;
+}
+
+.trip-content img {
+    display: block;
+    height: auto;
+}
+
+.trip-content figcaption {
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    color: var(--color-muted);
+    margin-top: 12px;
+    text-align: center;
+}
+
+.trip-content blockquote {
+    margin: 2.6em 0;
+    padding-left: 26px;
+    border-left: 2px solid var(--color-warm);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+    line-height: 1.45;
+    color: var(--color-dark);
+}
+
+.trip-content blockquote p { font: inherit; color: inherit; }
+
+/* --- Article footer --- */
+.trip-footer {
+    max-width: 720px;
+    margin: 64px auto 0;
+    padding: 32px 28px 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.trip-back {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-warm-dk);
+}
+
+.trip-back:hover { color: var(--color-dark); }
+
+/* --- Prev / next --- */
+.trip-nav {
+    max-width: var(--max-width);
+    margin: 80px auto 0;
+    padding: 0 28px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.trip-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: var(--color-white);
+    transition: transform 0.3s ease;
+}
+
+.trip-nav-link:hover { transform: translateY(-3px); }
+
+.trip-nav-next {
+    grid-column: 2;
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.trip-nav-thumb {
+    width: 92px;
+    height: 68px;
+    flex: none;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--color-mid);
+}
+
+.trip-nav-label {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-warm-dk);
+    margin-bottom: 8px;
+}
+
+.trip-nav-title {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.22;
+    color: var(--color-dark);
+}
+
+/* --- Related --- */
+.trip-related {
+    margin-top: 96px;
+}
+
+.trip-related-title {
+    max-width: var(--max-width);
+    margin: 0 auto 44px;
+    padding: 0 28px;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.7rem, 3.4vw, 2.2rem);
+    color: var(--color-dark);
+}
+
+@media (max-width: 900px) {
+    .trip-hero { height: 68vh; }
+    .trip-article { padding-top: 52px; }
+    .trip-nav { grid-template-columns: 1fr; }
+    .trip-nav-next { grid-column: 1; flex-direction: row; text-align: left; }
+}
+
+@media (max-width: 560px) {
+    .trip-hero { height: 60vh; min-height: 380px; }
+    .trip-hero-content { padding-bottom: 44px; }
+    .trip-content figure { margin: 2.2em 0; }
+    .trip-related { margin-top: 64px; }
+}
