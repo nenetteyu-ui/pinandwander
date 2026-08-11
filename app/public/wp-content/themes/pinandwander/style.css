@@ -1641,6 +1641,21 @@ a.card-link { cursor: pointer; }
     .trip-article { padding-top: 52px; }
     .trip-nav { grid-template-columns: 1fr; }
     .trip-nav-next { grid-column: 1; flex-direction: row; text-align: left; }
+
+    /* Not enough room for side tracks — one column, and let wide/full
+       photos bleed to the screen edges instead. */
+    .trip-content {
+        display: block;
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .trip-content > .alignwide,
+    .trip-content > .alignfull {
+        margin-left: -24px;
+        margin-right: -24px;
+    }
 }
 
 @media (max-width: 560px) {
