@@ -19,7 +19,7 @@ get_header();
 
     <main id="main" class="site-main page">
 
-        <header class="page-masthead">
+        <header class="page-masthead reveal">
             <span class="journal-kicker"><?php esc_html_e( 'Work With Me', 'pinandwander' ); ?></span>
             <h1 class="page-title"><?php the_title(); ?></h1>
             <?php if ( has_excerpt() ) : ?>
@@ -28,14 +28,14 @@ get_header();
         </header>
 
         <?php if ( has_post_thumbnail() ) : ?>
-            <figure class="page-portrait">
+            <figure class="page-portrait reveal reveal-soft">
                 <?php the_post_thumbnail( 'large', array( 'alt' => esc_attr( get_the_title() ) ) ); ?>
             </figure>
         <?php endif; ?>
 
         <?php if ( trim( get_the_content() ) !== '' ) : ?>
             <article <?php post_class( 'page-article' ); ?>>
-                <div class="prose">
+                <div class="prose reveal">
                     <?php the_content(); ?>
                 </div>
             </article>
@@ -43,7 +43,7 @@ get_header();
             <?php get_template_part( 'template-parts/page-empty' ); ?>
         <?php endif; ?>
 
-        <section class="contact-cta" aria-labelledby="contact-cta-title">
+        <section class="contact-cta reveal" aria-labelledby="contact-cta-title">
             <h2 class="contact-cta-title" id="contact-cta-title">
                 <?php esc_html_e( 'Let&rsquo;s plan something extraordinary', 'pinandwander' ); ?>
             </h2>

@@ -15,7 +15,7 @@
 
     <?php if ( have_posts() ) : ?>
 
-        <div class="journal-grid">
+        <div class="journal-grid" data-reveal-stagger="90">
             <?php
             while ( have_posts() ) :
                 the_post();

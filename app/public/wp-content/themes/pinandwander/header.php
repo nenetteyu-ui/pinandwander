@@ -6,6 +6,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" href="<?php echo esc_url( get_template_directory_uri() . '/assets/favicon.svg' ); ?>" type="image/svg+xml">
+    <?php
+    /* Marks the page as JS-capable before first paint. Scroll-reveal styles are
+       scoped to .js, so with JavaScript off the content simply renders visible
+       instead of staying stuck at opacity 0. */
+    ?>
+    <script>document.documentElement.classList.add('js');</script>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>

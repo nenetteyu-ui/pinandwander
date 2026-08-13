@@ -74,6 +74,68 @@
         });
     }
 
+    // ── Scroll reveal ─────────────────────────────────────────────────
+    // Elements marked .reveal fade and rise as they scroll into view.
+    // Children of a [data-reveal-stagger] container arrive in sequence.
+    (function () {
+        var revealEls = document.querySelectorAll('.reveal');
+        if (!revealEls.length) {
+            return;
+        }
+
+        function showAll() {
+            for (var i = 0; i < revealEls.length; i++) {
+                revealEls[i].classList.add('is-visible');
+            }
+        }
+
+        // Older browsers, or anyone who prefers less motion: just show it.
+        if (!('IntersectionObserver' in window)) {
+            showAll();
+            return;
+        }
+        if (window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            showAll();
+            return;
+        }
+
+        // Stagger each group's direct children so grids arrive as a wave.
+        var groups = document.querySelectorAll('[data-reveal-stagger]');
+        for (var g = 0; g < groups.length; g++) {
+            var kids = groups[g].children;
+            var step = parseInt(groups[g].getAttribute('data-reveal-stagger'), 10) || 90;
+            var shown = 0;
+            for (var k = 0; k < kids.length; k++) {
+                if (kids[k].classList.contains('reveal')) {
+                    // Cap the delay so a long archive page never stalls.
+                    kids[k].style.setProperty(
+                        '--reveal-delay',
+                        Math.min(shown * step, step * 5) + 'ms'
+                    );
+                    shown++;
+                }
+            }
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            // Fire a little before the element is fully on screen.
+            rootMargin: '0px 0px -8% 0px',
+            threshold: 0.08
+        });
+
+        for (var n = 0; n < revealEls.length; n++) {
+            observer.observe(revealEls[n]);
+        }
+    })();
+
     // ── Hero slideshow ────────────────────────────────────────────────
     if (hero) {
         var slides = hero.querySelectorAll('.hero-slide');

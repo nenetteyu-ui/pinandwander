@@ -1816,3 +1816,38 @@ a.card-link { cursor: pointer; }
     color: var(--color-muted);
     margin-bottom: 20px;
 }
+
+/* ============================================================
+   SCROLL REVEAL
+   Scoped to .js (set in header.php before first paint) so content
+   is never left hidden when JavaScript is off or fails to load.
+   ============================================================ */
+.js .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+        opacity 0.75s cubic-bezier(0.22, 0.61, 0.36, 1),
+        transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* A gentler variant for large media, which looks wrong sliding far */
+.js .reveal-soft {
+    transform: translateY(14px) scale(0.995);
+}
+
+/* Motion is decoration here — honour the system setting and show everything. */
+@media (prefers-reduced-motion: reduce) {
+    .js .reveal,
+    .js .reveal.is-visible,
+    .js .reveal-soft {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

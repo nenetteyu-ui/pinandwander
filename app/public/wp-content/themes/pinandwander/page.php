@@ -4,7 +4,7 @@
 
     <main id="main" class="site-main page">
 
-        <header class="page-masthead">
+        <header class="page-masthead reveal">
             <h1 class="page-title"><?php the_title(); ?></h1>
             <?php if ( has_excerpt() ) : ?>
                 <p class="page-dek"><?php echo esc_html( get_the_excerpt() ); ?></p>
@@ -12,14 +12,14 @@
         </header>
 
         <?php if ( has_post_thumbnail() ) : ?>
-            <figure class="page-portrait">
+            <figure class="page-portrait reveal reveal-soft">
                 <?php the_post_thumbnail( 'large', array( 'alt' => esc_attr( get_the_title() ) ) ); ?>
             </figure>
         <?php endif; ?>
 
         <?php if ( trim( get_the_content() ) !== '' ) : ?>
             <article <?php post_class( 'page-article' ); ?>>
-                <div class="prose">
+                <div class="prose reveal">
                     <?php
                     the_content();
 

@@ -33,10 +33,10 @@
         <article <?php post_class( 'trip-article' ); ?>>
 
             <?php if ( has_excerpt() ) : ?>
-                <p class="trip-standfirst"><?php echo esc_html( get_the_excerpt() ); ?></p>
+                <p class="trip-standfirst reveal"><?php echo esc_html( get_the_excerpt() ); ?></p>
             <?php endif; ?>
 
-            <div class="prose">
+            <div class="prose reveal">
                 <?php
                 the_content();
 
@@ -47,7 +47,7 @@
                 ?>
             </div>
 
-            <footer class="trip-footer">
+            <footer class="trip-footer reveal">
                 <a class="trip-back" href="<?php echo esc_url( pinandwander_journal_url() ); ?>">
                     <?php esc_html_e( '&larr; All stories', 'pinandwander' ); ?>
                 </a>
@@ -97,7 +97,7 @@
 
             if ( $pw_related->have_posts() ) :
                 ?>
-                <section class="trip-related">
+                <section class="trip-related reveal">
                     <h2 class="trip-related-title">
                         <?php
                         printf(
@@ -107,7 +107,7 @@
                         );
                         ?>
                     </h2>
-                    <div class="journal-grid">
+                    <div class="journal-grid" data-reveal-stagger="90">
                         <?php
                         while ( $pw_related->have_posts() ) :
                             $pw_related->the_post();

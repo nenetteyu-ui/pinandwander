@@ -52,12 +52,12 @@
          ================================================ -->
     <section class="section-destinations">
 
-        <div class="section-header">
+        <div class="section-header reveal">
             <span class="eyebrow">Latest Adventures</span>
             <h2 class="section-title">Recent Destinations</h2>
         </div>
 
-        <div class="destinations-grid">
+        <div class="destinations-grid" data-reveal-stagger="90">
             <?php
             $args = array(
                 'post_type'      => 'post',
@@ -72,7 +72,7 @@
                     $categories = get_the_category();
                     $region     = ! empty( $categories ) ? esc_html( $categories[0]->name ) : '';
                     ?>
-                    <article class="destination-card">
+                    <article class="destination-card reveal">
                         <a href="<?php the_permalink(); ?>" class="card-link">
                             <div class="card-image">
                                 <?php if ( has_post_thumbnail() ) : ?>
@@ -105,7 +105,7 @@
                 );
                 foreach ( $placeholders as $card ) :
                     ?>
-                    <article class="destination-card">
+                    <article class="destination-card reveal">
                         <div class="card-link">
                             <div class="card-image">
                                 <div class="card-placeholder"></div>
@@ -136,11 +136,11 @@
     <section class="section-about">
         <div class="about-inner">
 
-            <div class="about-image">
+            <div class="about-image reveal reveal-soft">
                 <div class="about-placeholder"></div>
             </div>
 
-            <div class="about-content">
+            <div class="about-content reveal">
                 <span class="eyebrow">About</span>
                 <h2 class="section-title">Turning Wanderlust<br>Into Reality</h2>
                 <p class="about-text">
@@ -158,7 +158,7 @@
          WORK WITH ME BANNER
          ================================================ -->
     <section class="section-cta-banner">
-        <div class="cta-inner">
+        <div class="cta-inner reveal">
             <span class="eyebrow eyebrow--light">Travel Advisory Services</span>
             <h2 class="cta-title">Let&rsquo;s Plan Your Next Adventure</h2>
             <p class="cta-text">

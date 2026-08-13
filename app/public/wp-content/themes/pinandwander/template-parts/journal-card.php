@@ -5,7 +5,7 @@
 $pw_cats   = get_the_category();
 $pw_region = ! empty( $pw_cats ) ? $pw_cats[0]->name : '';
 ?>
-<article <?php post_class( 'story-card' ); ?>>
+<article <?php post_class( 'story-card reveal' ); ?>>
     <a href="<?php the_permalink(); ?>" class="story-link">
         <div class="story-media">
             <?php if ( has_post_thumbnail() ) : ?>
