@@ -96,6 +96,34 @@ in use — safe to delete.
 
 ---
 
+## Evaluated, deliberately not installed
+
+### 21st.dev / Magic MCP — 2026-08-13
+
+A catalog of React components plus an MCP server that generates UI from plain
+descriptions. The install command doing the rounds is:
+
+```bash
+npx @21st-dev/cli@latest install claude --api-key YOUR_KEY
+```
+
+**Not used, because it outputs React + TypeScript only** (shadcn/ui, Tailwind,
+Radix). Their docs state there is no Vue, Svelte, Angular, or vanilla JS
+support. This site is a WordPress PHP theme with hand-written CSS, so nothing it
+generates would drop in. It also needs Node (not installed), a paid-ish account
+and API key, and its free tier is only a handful of generations.
+
+Worth revisiting only if a future project is React/Next.js — the same goes for
+the `ui-styling` and `design-system` skills.
+
+### Node.js — 2026-08-13
+
+Deliberately skipped. WordPress runs on PHP, which Local already provides, so
+the site needs nothing from Node. Revisit only if the `.cjs` scripts in `brand`
+and `design-system` become genuinely useful. See notes above.
+
+---
+
 ## Still to do
 
 - **Deploy:** hosting on WP Engine, so the site goes live through Local's built-in
