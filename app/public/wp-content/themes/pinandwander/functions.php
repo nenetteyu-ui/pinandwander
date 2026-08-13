@@ -23,7 +23,7 @@ function pinandwander_scripts() {
     // Google Fonts
     wp_enqueue_style(
         'pinandwander-fonts',
-        'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap',
+        'https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500&display=swap',
         array(),
         null
     );
@@ -204,7 +204,6 @@ function pinandwander_journal_map_data() {
 
 function pinandwander_fallback_nav() {
     echo '<ul class="nav-menu">';
-    echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">Home</a></li>';
     echo '<li><a href="' . esc_url( pinandwander_journal_url() ) . '">Photo Journal</a></li>';
     echo '<li><a href="' . esc_url( home_url( '/about' ) ) . '">About</a></li>';
     echo '<li><a href="' . esc_url( home_url( '/contact' ) ) . '">Work With Me</a></li>';
