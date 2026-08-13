@@ -5,6 +5,7 @@ so it's easy to remember what we set up and why. Newest first.
 
 | Date | What | Where | Why |
 |------|------|-------|-----|
+| 2026-08-13 | 6 companion skills: `design`, `design-system`, `brand`, `banner-design`, `ui-styling`, `slides` | `~/.claude/skills/` | Rest of the same repo — logos, design tokens, brand voice, banners, Tailwind/shadcn, presentations |
 | 2026-08-13 | **ui-ux-pro-max** skill v2.13.0 | `~/.claude/skills/ui-ux-pro-max/` | Searchable UI/UX design database — 84 styles, 192 palettes, 74 font pairings, 98 UX guidelines |
 | 2026-08-11 | Repo-local SSH command | `.git/config` in this repo | Fixes `Permission denied (publickey)` on push |
 | 2026-08-10 | Git + GitHub backup | this repo → `github.com/nenetteyu-ui/pinandwander` | Version history and off-machine backup |
@@ -34,12 +35,41 @@ Try it with:
 python3 ~/.claude/skills/ui-ux-pro-max/scripts/search.py "travel photography portfolio" --domain style
 ```
 
-**Not installed** — the same repo also bundles `design`, `design-system`,
-`brand`, `banner-design`, `ui-styling`, and `slides`. The `design-system` one
-includes scripts that fetch images over the network, so it would need its own
-check before installing.
-
 To remove: `rm -rf ~/.claude/skills/ui-ux-pro-max`
+
+### The 6 companion skills
+
+Installed from the same repo on 2026-08-13, the same way (copied by hand, no
+installer run). Total for all seven: 8.2 MB.
+
+| Skill | Size | What it does | Works today? |
+|-------|------|--------------|--------------|
+| `design` | 316K | Logos (55 styles), corporate identity, design tokens | Search yes; logo *generation* needs a Gemini API key |
+| `design-system` | 240K | Token architecture (primitive→semantic→component), slide generation | Python parts yes; `.cjs` token scripts need Node |
+| `brand` | 128K | Brand voice, messaging frameworks, asset management | Needs Node — all 4 scripts are `.cjs` |
+| `ui-styling` | 5.7M | Tailwind config generation, shadcn/ui components | Config generator yes; `shadcn_add.py` shells out to `npx` |
+| `slides` | 32K | HTML presentations with Chart.js | Yes — reference material, no scripts |
+| `banner-design` | 20K | Social/ad/hero banners | Partly — see missing dependencies below |
+
+**Two caveats worth remembering:**
+
+1. **Node isn't installed on this Mac.** Anything ending in `.cjs` won't run yet
+   — that's all of `brand`, plus the token generators in `design-system`, plus
+   shadcn component installs in `ui-styling`. Python 3 is present, so the
+   Python-based skills work now. Install Node only if you want those parts.
+2. **`banner-design` expects skills that aren't in this repo** — `ai-artist`,
+   `ai-multimodal`, and `chrome-devtools`. Its banner *strategy* guidance still
+   reads fine, but the image-generation steps will not resolve.
+
+Image generation in `design` and `banner-design` goes through Google's Gemini
+API and looks for a `GEMINI_API_KEY` environment variable. Nothing is set, so
+those paths are inert — no key, no calls, no cost.
+
+Correction to an earlier note: `design-system/scripts/fetch-background.py`
+does **not** download anything despite its name. It only builds a Pexels search
+URL string for a human to open.
+
+To remove any of them: `rm -rf ~/.claude/skills/<name>`
 
 ### Repo-local SSH command
 
