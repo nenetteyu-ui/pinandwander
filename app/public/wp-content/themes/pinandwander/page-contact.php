@@ -19,7 +19,7 @@ get_header();
 
     <main id="main" class="site-main page">
 
-        <header class="page-masthead reveal">
+        <header class="page-masthead">
             <span class="journal-kicker"><?php esc_html_e( 'Work With Me', 'pinandwander' ); ?></span>
             <h1 class="page-title"><?php the_title(); ?></h1>
             <?php if ( has_excerpt() ) : ?>

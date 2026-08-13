@@ -104,7 +104,7 @@
         var groups = document.querySelectorAll('[data-reveal-stagger]');
         for (var g = 0; g < groups.length; g++) {
             var kids = groups[g].children;
-            var step = parseInt(groups[g].getAttribute('data-reveal-stagger'), 10) || 90;
+            var step = parseInt(groups[g].getAttribute("data-reveal-stagger"), 10) || 110;
             var shown = 0;
             for (var k = 0; k < kids.length; k++) {
                 if (kids[k].classList.contains('reveal')) {
@@ -131,8 +131,17 @@
             threshold: 0.08
         });
 
+        // Reveal is for content you scroll TO. Anything already on screen at
+        // load is shown at once with the transition suppressed, so headings
+        // never fade in under the visitor's eyes on arrival.
+        var viewportH = window.innerHeight || document.documentElement.clientHeight;
+
         for (var n = 0; n < revealEls.length; n++) {
-            observer.observe(revealEls[n]);
+            if (revealEls[n].getBoundingClientRect().top < viewportH) {
+                revealEls[n].classList.add('is-instant', 'is-visible');
+            } else {
+                observer.observe(revealEls[n]);
+            }
         }
     })();
 
@@ -148,7 +157,7 @@
                 slides[current].classList.remove('is-active');
                 current = (current + 1) % slides.length;
                 slides[current].classList.add('is-active');
-            }, 6000);
+            }, 7500);
         }
     }
 })();

@@ -4,7 +4,7 @@
 
     <main id="main" class="site-main page">
 
-        <header class="page-masthead reveal">
+        <header class="page-masthead">
             <h1 class="page-title"><?php the_title(); ?></h1>
             <?php if ( has_excerpt() ) : ?>
                 <p class="page-dek"><?php echo esc_html( get_the_excerpt() ); ?></p>
