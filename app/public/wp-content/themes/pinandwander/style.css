@@ -304,29 +304,20 @@ h1, h2, h3 {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    /* Every slide starts hidden. The crossfade and the Ken Burns zoom are one
+       continuous keyframe animation per slide, offset by animation-delay —
+       generated in functions.php because the timing depends on how many
+       photos are in assets/hero/. One animation means nothing is ever removed
+       mid-flight, which is what used to make the change of photo visible. */
     opacity: 0;
-    /* The slow drift is a transition, not a keyframe animation. A keyframe is
-       bound to .is-active, so removing that class dropped the animation and
-       snapped the transform back — which is what made the change of photo
-       visible. A transition interpolates from wherever it currently is. */
-    transform: scale(1.07);
-    transition:
-        opacity 2.4s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 11s linear;
+    transform: scale(1);
     will-change: opacity, transform;
 }
 
+/* Fallback only: if the inline timing is absent (a single photo, or reduced
+   motion), the first slide still shows. */
 .hero-slide.is-active {
     opacity: 1;
-    transform: scale(1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .hero-slide,
-    .hero-slide.is-active {
-        transform: none;
-        transition: opacity 0.5s linear;
-    }
 }
 
 /*

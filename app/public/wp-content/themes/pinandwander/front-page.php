@@ -11,17 +11,19 @@
             $pw_hero_slides = pinandwander_hero_slides();
             if ( ! empty( $pw_hero_slides ) ) :
                 foreach ( $pw_hero_slides as $pw_i => $pw_url ) :
+                    // --pw-i staggers each slide's animation-delay (see functions.php).
                     printf(
-                        '<div class="hero-slide%1$s" style="background-image:url(%2$s)"></div>',
+                        '<div class="hero-slide%1$s" style="--pw-i:%2$d;background-image:url(%3$s)"></div>',
                         0 === $pw_i ? ' is-active' : '',
+                        (int) $pw_i,
                         esc_url( $pw_url )
                     );
                 endforeach;
             else :
                 // No photos in assets/hero/ yet — show on-brand gradient placeholders.
-                echo '<div class="hero-slide hero-slide-1 is-active"></div>';
-                echo '<div class="hero-slide hero-slide-2"></div>';
-                echo '<div class="hero-slide hero-slide-3"></div>';
+                echo '<div class="hero-slide hero-slide-1 is-active" style="--pw-i:0"></div>';
+                echo '<div class="hero-slide hero-slide-2" style="--pw-i:1"></div>';
+                echo '<div class="hero-slide hero-slide-3" style="--pw-i:2"></div>';
             endif;
             ?>
         </div>

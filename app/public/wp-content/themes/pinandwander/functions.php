@@ -59,6 +59,64 @@ function pinandwander_scripts() {
 add_action( 'wp_enqueue_scripts', 'pinandwander_scripts' );
 
 /**
+ * Hero slideshow timing.
+ *
+ * The crossfade runs entirely in CSS rather than on a JS timer: a keyframe
+ * animation starts the moment the page paints (a transition cannot, because
+ * the first slide is already marked active in the markup and so never changes
+ * state), and it is not subject to background-tab timer throttling.
+ *
+ * The keyframe percentages depend on how many photos are in assets/hero/,
+ * so the rule is generated here rather than hard-coded in style.css.
+ */
+function pinandwander_hero_inline_css() {
+    if ( ! is_front_page() ) {
+        return;
+    }
+
+    $slides = pinandwander_hero_slides();
+    $count  = count( $slides );
+
+    if ( 0 === $count ) {
+        $count = 3; // the on-brand gradient placeholders
+    }
+    if ( $count < 2 ) {
+        return; // a lone photo has nothing to cross-fade to
+    }
+
+    $slot  = 7.0;  // seconds each photo holds on its own
+    $fade  = 2.6;  // seconds the outgoing and incoming photos overlap
+    $total = $slot * $count;
+
+    $fade_in  = round( $fade / $total * 100, 3 );
+    $hold_end = round( $slot / $total * 100, 3 );
+    $fade_out = round( ( $slot + $fade ) / $total * 100, 3 );
+
+    $css = "
+.hero-slide {
+    animation: pwHeroCycle {$total}s linear infinite;
+    animation-delay: calc(var(--pw-i, 0) * {$slot}s);
+}
+
+@keyframes pwHeroCycle {
+    0%              { opacity: 0; transform: scale(1); }
+    {$fade_in}%     { opacity: 1; }
+    {$hold_end}%    { opacity: 1; }
+    {$fade_out}%    { opacity: 0; transform: scale(1.2); }
+    100%            { opacity: 0; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-slide { animation: none; }
+    .hero-slide.is-active { opacity: 1; transform: none; }
+}
+";
+
+    wp_add_inline_style( 'pinandwander-style', $css );
+}
+add_action( 'wp_enqueue_scripts', 'pinandwander_hero_inline_css', 20 );
+
+/**
  * URL of the Photo Journal (the WordPress "Posts page" if one is set,
  * otherwise /blog). Keeps nav links correct once the Posts page is assigned.
  */

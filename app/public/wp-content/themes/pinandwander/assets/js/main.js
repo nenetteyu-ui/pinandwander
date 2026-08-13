@@ -145,19 +145,7 @@
         }
     })();
 
-    // ── Hero slideshow ────────────────────────────────────────────────
-    if (hero) {
-        var slides = hero.querySelectorAll('.hero-slide');
-        var reduceMotion = window.matchMedia &&
-            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        if (slides.length > 1 && !reduceMotion) {
-            var current = 0;
-            setInterval(function () {
-                slides[current].classList.remove('is-active');
-                current = (current + 1) % slides.length;
-                slides[current].classList.add('is-active');
-            }, 7500);
-        }
-    }
+    // The hero crossfade is pure CSS (see pinandwander_hero_inline_css in
+    // functions.php) so it starts on paint and never stalls behind a
+    // throttled background timer.
 })();
