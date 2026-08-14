@@ -179,8 +179,8 @@ h1, h2, h3 {
 
 .logo-text {
     font-family: var(--font-serif);
-    font-size: 1.15rem;
-    font-weight: 400;
+    font-size: 1.45rem;
+    font-weight: 600;
     letter-spacing: 0.03em;
 }
 
@@ -365,8 +365,8 @@ h1, h2, h3 {
 
 .hero-title {
     font-family: var(--font-serif);
-    font-size: clamp(2.8rem, 7vw, 6rem);
-    font-weight: 400;
+    font-size: clamp(3.2rem, 8vw, 7rem);
+    font-weight: 600;
     letter-spacing: -0.01em;
     line-height: 1.05;
     margin-bottom: 22px;
@@ -945,7 +945,7 @@ a.card-link { cursor: pointer; }
    RESPONSIVE — SMALL MOBILE (≤480px)
    ============================================================ */
 @media (max-width: 480px) {
-    .hero-title { font-size: 2.6rem; }
+    .hero-title { font-size: 3rem; }
     .hero-actions { flex-direction: column; align-items: center; }
     .btn { width: 100%; text-align: center; }
     .section-destinations { padding: 56px 16px; }
