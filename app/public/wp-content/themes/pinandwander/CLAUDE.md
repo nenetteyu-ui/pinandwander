@@ -14,6 +14,18 @@
 - Mobile responsive
 - Professional and beautiful
 
+## Brand Colours
+| Use | Hex | Notes |
+|-----|-----|-------|
+| Backgrounds, dark panels | `#10231a` | The site green. Very dark — reads as near-black when used for *text*. |
+| **Text on light backgrounds** | `#1d4a34` | Confirmed 2026-08-13. The mid-green from the hero gradient; the one that actually reads as sea green. Use for the wordmark and type on cream or white. |
+| Cream / page background | `#f5f3ef` | |
+| Gold accent (on dark) | `#c9a96e` | Washes out on cream — use the darker gold there. |
+| Gold accent (on cream) | `#a8863d` | |
+
+Display face: Cormorant Garamond (italic 400 required — the gold ampersand
+in the wordmark depends on it). Body: Inter.
+
 ## Pages
 1. **Home** - Full screen hero photo, site name overlay, short tagline, latest trips in large visual grid below
 2. **Blog / Photo Journal** - Large photo cards for each post, destination name overlaid on image, filterable by region
