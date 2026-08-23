@@ -712,7 +712,7 @@ a.card-link { cursor: pointer; }
     font-family: var(--font-serif);
     font-style: italic;
     font-size: 0.82rem;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.52);
     max-width: 200px;
     line-height: 1.55;
 }
@@ -772,7 +772,7 @@ a.card-link { cursor: pointer; }
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.42);
+    color: rgba(255, 255, 255, 0.56);
     transition: color var(--ease);
 }
 
@@ -790,7 +790,7 @@ a.card-link { cursor: pointer; }
 
 .footer-copy {
     font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.48);
     letter-spacing: 0.03em;
 }
 
