@@ -13,6 +13,33 @@
 - Minimal, elegant typography
 - Mobile responsive
 - Professional and beautiful
+- **The site should feel alive, not static** — see Motion below
+
+## Motion
+
+Motion is part of the first draft of any page, not a polish pass. The
+benchmarks are the hero slideshow and the pulsing map pin.
+
+**Patterns already built — reuse these:**
+
+| Pattern | How to use it |
+|---------|----------------|
+| Scroll reveal | Add `reveal` to a block. Put `data-reveal-stagger="110"` on a grid parent and its children arrive in a wave. |
+| Hero crossfade | Pure CSS, generated in `pinandwander_hero_inline_css()`. Timing adapts to however many photos sit in `assets/hero/`. |
+| Hover that moves | Map pins: `.jpin-art` transitions the size, nested `.jpin-pulse` animates the beat. Two groups so it can ease up *and* pulse at once. |
+
+**Rules learned the hard way:**
+
+- **Keyframes, not transitions, for anything that must move on load.** A
+  transition needs a state change; server-rendered markup usually has none, so
+  the element just sits there. This is what left the first hero slide static.
+- **CSS animation over JS timers.** `setInterval` stalls behind background-tab
+  throttling.
+- **Reveal is for content you scroll *to*.** Anything already on screen at load
+  is shown instantly — headings must never fade in under the reader.
+- **Always honour `prefers-reduced-motion: reduce`.**
+- **No animation libraries, no build step.** Node is deliberately not
+  installed. Plain CSS and small vanilla JS only.
 
 ## Brand Colours
 | Use | Hex | Notes |
