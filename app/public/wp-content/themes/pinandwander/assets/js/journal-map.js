@@ -36,14 +36,17 @@
     regions.forEach(function (r) {
         frag += '<g class="jpin" data-region="' + esc(r.slug) + '" role="button" tabindex="0" aria-label="' + esc(r.name) +
                 '" transform="translate(' + r.pin[0] + ',' + r.pin[1] + ') scale(' + PIN_SCALE + ')">' +
-                // The art sits in its own group so CSS can scale it on hover.
-                // Scaling the outer <g> instead would overwrite its transform
-                // attribute and drop every pin at the map's origin.
+                // Two nested groups, both anchored at the pin's tip:
+                //   .jpin-art   — grows smoothly on hover (transition)
+                //   .jpin-pulse — the steady heartbeat (animation)
+                // They nest so the pin can ease up to size and pulse at the
+                // same time. Scaling the outer <g> instead would overwrite the
+                // transform attribute that positions it on the map.
                 '<g class="jpin-art">' +
-                '<circle class="jpin-ping" cx="0" cy="-16" r="6"/>' +
-                '<circle class="jpin-halo" cx="0" cy="-16" r="12"/>' +
+                '<g class="jpin-pulse">' +
                 '<path class="jpin-shape" d="M0,0 C-5,-8 -8,-11 -8,-16 A8,8 0 1 1 8,-16 C8,-11 5,-8 0,0 Z"/>' +
                 '<circle class="jpin-dot" cx="0" cy="-16" r="3"/>' +
+                '</g>' +
                 '</g>' +
                 '<text class="jpin-label" x="0" y="19" text-anchor="middle">' + esc(r.name) + '</text>' +
                 '</g>';

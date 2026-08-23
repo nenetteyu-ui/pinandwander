@@ -1307,9 +1307,6 @@ a.card-link { cursor: pointer; }
 .jhit { fill: transparent; cursor: pointer; }
 
 .jpin { cursor: pointer; }
-.jpin-halo { fill: var(--color-warm); opacity: 0; transition: opacity 0.3s ease; }
-.jpin.is-active .jpin-halo,
-.jpin:focus-visible .jpin-halo { opacity: 0.26; }
 .jpin-shape { fill: var(--color-warm); stroke: var(--color-green); stroke-width: 0.7; transition: fill 0.25s ease; }
 .jpin.is-active .jpin-shape { fill: #e8c88a; }
 .jpin-dot { fill: var(--color-green); }
@@ -1327,12 +1324,17 @@ a.card-link { cursor: pointer; }
 .jpin.is-active .jpin-label { fill: #f0d9a6; }
 .jmap-panel.has-selection .jpin:not(.is-active) { opacity: 0.55; }
 
-/* Hover / focus: the pin grows from its own tip, so it stays anchored to the
-   place it marks. Only .jpin-art scales — the outer <g> carries the
-   translate/scale attribute that positions the pin on the map. */
-.jpin-art {
+/* Hover / focus. Both groups scale from the pin's own tip, so it stays
+   anchored to the place it marks. The outer <g> is left alone — it carries the
+   transform attribute that positions the pin on the map. */
+.jpin-art,
+.jpin-pulse {
     transform-box: fill-box;
     transform-origin: 50% 100%;
+}
+
+/* .jpin-art eases the pin up to size … */
+.jpin-art {
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -1341,18 +1343,23 @@ a.card-link { cursor: pointer; }
 .jpin.is-active .jpin-art     { transform: scale(1.22); }
 .jpin.is-active.is-hover .jpin-art { transform: scale(1.48); }
 
-.jpin.is-hover .jpin-halo { opacity: 0.3; }
 .jpin.is-hover .jpin-shape { fill: #e8c88a; }
 .jpin.is-hover .jpin-label { fill: #f0d9a6; }
 
 /* A hovered pin stays legible even when another region is selected */
 .jmap-panel.has-selection .jpin.is-hover { opacity: 1; }
 
+/* … while .jpin-pulse beats inside it. Nesting the two means the pin can ease
+   up to size and pulse at once, instead of the animation snapping it to size. */
 @media (prefers-reduced-motion: no-preference) {
-    .jpin-ping { fill: none; stroke: var(--color-warm); stroke-width: 0.8; opacity: 0; }
-    .jpin.is-active .jpin-ping,
-    .jpin.is-hover .jpin-ping { animation: jping 2.2s ease-out infinite; }
-    @keyframes jping { 0% { opacity: 0.5; r: 6px; } 100% { opacity: 0; r: 16px; } }
+    .jpin.is-hover .jpin-pulse,
+    .jpin.is-active .jpin-pulse {
+        animation: jpinPulse 1.4s ease-in-out infinite;
+    }
+    @keyframes jpinPulse {
+        0%, 100% { transform: scale(1); }
+        50%      { transform: scale(1.14); }
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
