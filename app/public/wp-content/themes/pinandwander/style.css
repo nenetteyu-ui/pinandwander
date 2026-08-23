@@ -20,8 +20,8 @@ Text Domain: pinandwander
     --color-light:   #f5f3ef;
     --color-warm:    #c9a96e;
     --color-warm-dk: #a8863d;
-    --color-green:   #10231a;
-    --color-green-2: #16311f;
+    --color-green:   #1d4a34;
+    --color-green-2: #16382a;
     --color-text:    #2c2c2c;
     --color-muted:   #888888;
     --color-white:   #ffffff;
@@ -282,11 +282,11 @@ h1, h2, h3 {
         radial-gradient(ellipse at 70% 32%, rgba(201, 169, 110, 0.13) 0%, transparent 58%),
         linear-gradient(
             150deg,
-            #0c1c14 0%,
-            #123024 32%,
-            #1d4a34 54%,
-            #143526 74%,
-            #0c1c14 100%
+            #16382a 0%,
+            #1d4a34 32%,
+            #2a6349 54%,
+            #1f4d37 74%,
+            #16382a 100%
         );
 }
 
@@ -324,7 +324,7 @@ h1, h2, h3 {
  * Gradient placeholders — shown only when assets/hero/ has no images yet.
  * Once you drop photos into that folder, the theme uses them automatically.
  */
-.hero-slide-1 { background-image: linear-gradient(150deg, #0c1c14 0%, #1d4a34 55%, #0c1c14 100%); }
+.hero-slide-1 { background-image: linear-gradient(150deg, #16382a 0%, #2a6349 55%, #16382a 100%); }
 .hero-slide-2 { background-image: linear-gradient(150deg, #241812 0%, #7a4a24 52%, #201510 100%); }
 .hero-slide-3 { background-image: linear-gradient(150deg, #0d2321 0%, #1f6a63 52%, #0d201e 100%); }
 
@@ -650,7 +650,7 @@ a.card-link { cursor: pointer; }
 .cta-text {
     font-size: 1rem;
     line-height: 1.78;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.72);
     margin-bottom: 40px;
     max-width: 500px;
     margin-left: auto;
@@ -662,7 +662,7 @@ a.card-link { cursor: pointer; }
    ============================================================ */
 .site-footer {
     background: var(--color-green);
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.72);
     padding: 64px 48px 40px;
 }
 
@@ -712,7 +712,7 @@ a.card-link { cursor: pointer; }
     font-family: var(--font-serif);
     font-style: italic;
     font-size: 0.82rem;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.62);
     max-width: 200px;
     line-height: 1.55;
 }
@@ -737,7 +737,7 @@ a.card-link { cursor: pointer; }
 
 .footer-nav-links a {
     font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.48);
+    color: rgba(255, 255, 255, 0.72);
     letter-spacing: 0.04em;
     transition: color var(--ease);
 }
@@ -772,7 +772,7 @@ a.card-link { cursor: pointer; }
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.42);
+    color: rgba(255, 255, 255, 0.68);
     transition: color var(--ease);
 }
 
@@ -790,7 +790,7 @@ a.card-link { cursor: pointer; }
 
 .footer-copy {
     font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.60);
     letter-spacing: 0.03em;
 }
 
@@ -1068,7 +1068,7 @@ a.card-link { cursor: pointer; }
 .lead-placeholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(150deg, #0c1c14 0%, #1d4a34 55%, #12281b 100%);
+    background: linear-gradient(150deg, #16382a 0%, #2a6349 55%, #1a4230 100%);
 }
 
 .lead-overlay {
@@ -1383,7 +1383,7 @@ a.card-link { cursor: pointer; }
 }
 
 .trip-hero.is-placeholder {
-    background: linear-gradient(150deg, #0c1c14 0%, #1d4a34 55%, #0c1c14 100%);
+    background: linear-gradient(150deg, #16382a 0%, #2a6349 55%, #16382a 100%);
 }
 
 .trip-hero-media {
