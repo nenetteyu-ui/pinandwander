@@ -37,7 +37,7 @@
                 <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn btn-primary">
                     <?php esc_html_e( 'Work With Me', 'pinandwander' ); ?>
                 </a>
-                <a href="<?php echo esc_url( home_url( '/blog' ) ); ?>" class="btn btn-ghost">
+                <a href="<?php echo esc_url( pinandwander_journal_url() ); ?>" class="btn btn-ghost">
                     <?php esc_html_e( 'Explore the Journal', 'pinandwander' ); ?>
                 </a>
             </div>
@@ -125,7 +125,7 @@
         </div>
 
         <div class="section-cta">
-            <a href="<?php echo esc_url( home_url( '/blog' ) ); ?>" class="btn btn-outline">
+            <a href="<?php echo esc_url( pinandwander_journal_url() ); ?>" class="btn btn-outline">
                 <?php esc_html_e( 'View All Destinations', 'pinandwander' ); ?>
             </a>
         </div>

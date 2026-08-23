@@ -15,7 +15,7 @@
                 <span class="footer-nav-label">Explore</span>
                 <div class="footer-nav-links">
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'pinandwander' ); ?></a>
-                    <a href="<?php echo esc_url( home_url( '/blog' ) ); ?>"><?php esc_html_e( 'Photo Journal', 'pinandwander' ); ?></a>
+                    <a href="<?php echo esc_url( pinandwander_journal_url() ); ?>"><?php esc_html_e( 'Photo Journal', 'pinandwander' ); ?></a>
                     <a href="<?php echo esc_url( home_url( '/about' ) ); ?>"><?php esc_html_e( 'About', 'pinandwander' ); ?></a>
                     <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>"><?php esc_html_e( 'Work With Me', 'pinandwander' ); ?></a>
                 </div>
