@@ -36,10 +36,15 @@
     regions.forEach(function (r) {
         frag += '<g class="jpin" data-region="' + esc(r.slug) + '" role="button" tabindex="0" aria-label="' + esc(r.name) +
                 '" transform="translate(' + r.pin[0] + ',' + r.pin[1] + ') scale(' + PIN_SCALE + ')">' +
+                // The art sits in its own group so CSS can scale it on hover.
+                // Scaling the outer <g> instead would overwrite its transform
+                // attribute and drop every pin at the map's origin.
+                '<g class="jpin-art">' +
                 '<circle class="jpin-ping" cx="0" cy="-16" r="6"/>' +
                 '<circle class="jpin-halo" cx="0" cy="-16" r="12"/>' +
                 '<path class="jpin-shape" d="M0,0 C-5,-8 -8,-11 -8,-16 A8,8 0 1 1 8,-16 C8,-11 5,-8 0,0 Z"/>' +
                 '<circle class="jpin-dot" cx="0" cy="-16" r="3"/>' +
+                '</g>' +
                 '<text class="jpin-label" x="0" y="19" text-anchor="middle">' + esc(r.name) + '</text>' +
                 '</g>';
     });
@@ -75,6 +80,20 @@
         var t = e.target.closest('.jpin, .jhit');
         if (t && t.getAttribute('data-region')) select(t.getAttribute('data-region'));
     });
+    // Hovering the pin — or anywhere in its region's hit area, which is what
+    // clicking already responds to — grows and pulses that pin.
+    function pinFor(el) {
+        var slug = el && el.getAttribute('data-region');
+        return slug ? mapEl.querySelector('.jpin[data-region="' + slug + '"]') : null;
+    }
+    ['pointerover', 'pointerout'].forEach(function (evt) {
+        mapEl.addEventListener(evt, function (e) {
+            if (!e.target.closest) return;
+            var pin = pinFor(e.target.closest('.jpin, .jhit'));
+            if (pin) pin.classList.toggle('is-hover', evt === 'pointerover');
+        });
+    });
+
     mapEl.addEventListener('keydown', function (e) {
         if (e.key !== 'Enter' && e.key !== ' ') return;
         var t = e.target.closest('.jpin');
