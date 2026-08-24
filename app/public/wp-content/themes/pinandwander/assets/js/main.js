@@ -202,16 +202,23 @@
         var gallery = split.querySelector('.trip-gallery');
         if (!prose || !gallery) return;
 
-        var figures = [];
+        var figures   = [];
+        var galleries = [];
         var kids = prose.children;
         for (var i = 0; i < kids.length; i++) {
             if (kids[i].tagName !== 'FIGURE') continue;
-            // A Gallery block is itself one <figure> wrapping many images.
-            // Moving it into the photo column would stack a whole grid into a
-            // single slot, so galleries stay in the flow of the story.
-            if (kids[i].classList.contains('wp-block-gallery')) continue;
-            figures.push(kids[i]);
+            // A Gallery block is itself one <figure> wrapping many images, so
+            // it cannot go in the photo column — it becomes its own full-width
+            // band under the story instead.
+            if (kids[i].classList.contains('wp-block-gallery')) galleries.push(kids[i]);
+            else figures.push(kids[i]);
         }
+
+        var gallerySlots = galleries.map(function (block) {
+            var slot = document.createComment('pw-gallery');
+            block.parentNode.insertBefore(slot, block);
+            return slot;
+        });
         // One photo has nothing to cross-fade to; none has nothing to move.
         if (figures.length < 2) return;
 
@@ -253,6 +260,10 @@
         function apply() {
             if (wide.matches && !moved) {
                 figures.forEach(function (fig) { gallery.appendChild(fig); });
+                // Galleries become a full-width band of their own, below the
+                // two columns — they cannot sit beside the sticky photo
+                // column without colliding with it.
+                galleries.forEach(function (block) { split.appendChild(block); });
                 moved = true;
                 split.classList.add('is-split');
                 current = -1;
@@ -261,6 +272,10 @@
                 figures.forEach(function (fig, i) {
                     slots[i].parentNode.insertBefore(fig, slots[i]);
                     fig.classList.remove('is-current');
+                    fig.removeAttribute('inert');
+                });
+                galleries.forEach(function (block, i) {
+                    gallerySlots[i].parentNode.insertBefore(block, gallerySlots[i]);
                 });
                 moved = false;
                 split.classList.remove('is-split');

@@ -1995,6 +1995,39 @@ a.card-link { cursor: pointer; }
         display: block;
     }
 
+    /* A gallery spans both columns as its own band beneath the story. It
+       cannot sit beside the sticky photo column without running into it. */
+    .trip-split.is-split > .wp-block-gallery {
+        grid-column: 1 / -1;
+        width: 100%;
+        max-width: none;
+        margin: 72px 0 0;
+    }
+
+    /* Give the tiles room to breathe at full width */
+    .trip-split.is-split > .wp-block-gallery.has-nested-images {
+        gap: 14px;
+    }
+
+    .trip-split.is-split > .wp-block-gallery.has-nested-images figure.wp-block-image {
+        margin: 0;
+    }
+
+    .trip-split.is-split > .wp-block-gallery.has-nested-images figure.wp-block-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .trip-split.is-split > .wp-block-gallery.has-nested-images figure.wp-block-image {
+        overflow: hidden;
+    }
+
+    .trip-split.is-split > .wp-block-gallery.has-nested-images figure.wp-block-image:hover img {
+        transform: scale(1.04);
+    }
+
     /* Captions sit over the foot of the photo rather than below it */
     .trip-gallery figcaption {
         position: absolute;
