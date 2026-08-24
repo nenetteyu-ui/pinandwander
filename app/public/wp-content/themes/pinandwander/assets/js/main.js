@@ -227,7 +227,19 @@
             track.className = 'pw-roll-track';
             viewport.appendChild(track);
 
-            tiles.forEach(function (tile) { track.appendChild(tile); });
+            tiles.forEach(function (tile) {
+                // Wrap caption text so the two-line clamp has something to act
+                // on: the caption itself is absolutely positioned, and that
+                // blockifies display, which silently defeats -webkit-line-clamp.
+                var cap = tile.querySelector('figcaption');
+                if (cap && !cap.querySelector('.pw-cap')) {
+                    var inner = document.createElement('span');
+                    inner.className = 'pw-cap';
+                    while (cap.firstChild) inner.appendChild(cap.firstChild);
+                    cap.appendChild(inner);
+                }
+                track.appendChild(tile);
+            });
 
             tiles.forEach(function (tile, index) {
                 var copy = tile.cloneNode(true);
