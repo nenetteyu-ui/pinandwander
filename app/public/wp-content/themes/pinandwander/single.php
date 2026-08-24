@@ -44,19 +44,30 @@
              */
             ?>
             <div class="trip-split">
-                <div class="trip-textcol">
-                    <div class="prose reveal">
-                        <?php
-                        the_content();
+                <?php
+                /*
+                 * .trip-columns is what makes the sticky photo column let go at
+                 * the end of the text. A sticky item is held by its containing
+                 * block, so with the gallery band inside the same grid the
+                 * column stayed pinned and the band scrolled over it.
+                 */
+                ?>
+                <div class="trip-columns">
+                    <div class="trip-textcol">
+                        <div class="prose reveal">
+                            <?php
+                            the_content();
 
-                        wp_link_pages( array(
-                            'before' => '<nav class="trip-pagelinks">',
-                            'after'  => '</nav>',
-                        ) );
-                        ?>
+                            wp_link_pages( array(
+                                'before' => '<nav class="trip-pagelinks">',
+                                'after'  => '</nav>',
+                            ) );
+                            ?>
+                        </div>
                     </div>
+                    <aside class="trip-gallery"></aside>
                 </div>
-                <aside class="trip-gallery"></aside>
+                <?php // Gallery blocks are appended here by main.js, below the columns. ?>
             </div>
 
             <footer class="trip-footer reveal">

@@ -202,6 +202,76 @@
         var gallery = split.querySelector('.trip-gallery');
         if (!prose || !gallery) return;
 
+        /*
+         * Turn a Gallery block into one continuously rolling strip.
+         *
+         * The track holds the real tiles followed by a clone of each. When the
+         * animation has moved exactly one set's width it restarts, so the loop
+         * is seamless. Clones have every data-wp-* attribute stripped and their
+         * lightbox button removed — duplicating those would give WordPress two
+         * elements claiming the same interactivity key. A click on a clone is
+         * forwarded to the tile it copies, so the lightbox opens the right
+         * photo and still counts "3 of 6" correctly.
+         */
+        function buildRoller(block) {
+            var tiles = [];
+            var nodes = block.children;
+            for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'FIGURE') tiles.push(nodes[i]);
+            }
+            if (tiles.length < 2) return;
+
+            var viewport = document.createElement('div');
+            viewport.className = 'pw-roll-viewport';
+            var track = document.createElement('div');
+            track.className = 'pw-roll-track';
+            viewport.appendChild(track);
+
+            tiles.forEach(function (tile) { track.appendChild(tile); });
+
+            tiles.forEach(function (tile, index) {
+                var copy = tile.cloneNode(true);
+                copy.classList.add('pw-roll-clone');
+                copy.setAttribute('aria-hidden', 'true');
+                stripInteractivity(copy);
+                var btn = copy.querySelector('.lightbox-trigger');
+                if (btn) btn.parentNode.removeChild(btn);
+                copy.addEventListener('click', function () {
+                    var target = tiles[index].querySelector('img');
+                    if (target) target.click();
+                });
+                track.appendChild(copy);
+            });
+
+            block.appendChild(viewport);
+            block.classList.add('pw-roll');
+
+            // Shift by exactly one set, gaps included, so it loops invisibly.
+            function measure() {
+                var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+                var span = 0;
+                for (var i = 0; i < tiles.length; i++) {
+                    span += tiles[i].getBoundingClientRect().width + gap;
+                }
+                block.style.setProperty('--pw-roll-shift', span + 'px');
+                // A steady pace whatever the number of photos.
+                block.style.setProperty('--pw-roll-duration', Math.round(span / 90) + "s");
+            }
+            measure();
+            window.addEventListener('resize', measure);
+            // Re-measure once photos have their real dimensions.
+            window.addEventListener('load', measure);
+        }
+
+        function stripInteractivity(el) {
+            var all = [el].concat(Array.prototype.slice.call(el.querySelectorAll('*')));
+            all.forEach(function (node) {
+                Array.prototype.slice.call(node.attributes).forEach(function (attr) {
+                    if (attr.name.indexOf('data-wp-') === 0) node.removeAttribute(attr.name);
+                });
+            });
+        }
+
         var figures   = [];
         var galleries = [];
         var kids = prose.children;
@@ -263,7 +333,10 @@
                 // Galleries become a full-width band of their own, below the
                 // two columns — they cannot sit beside the sticky photo
                 // column without colliding with it.
-                galleries.forEach(function (block) { split.appendChild(block); });
+                galleries.forEach(function (block) {
+                    split.appendChild(block);
+                    if (!block.classList.contains('pw-roll')) buildRoller(block);
+                });
                 moved = true;
                 split.classList.add('is-split');
                 current = -1;

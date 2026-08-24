@@ -1932,12 +1932,18 @@ a.card-link { cursor: pointer; }
    ============================================================ */
 @media (min-width: 1024px) {
     .trip-split.is-split {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
-        gap: 64px;
         max-width: 1360px;
         margin: 0 auto;
         padding: 0 48px;
+    }
+
+    /* The grid lives here, not on .trip-split, so the sticky photo column is
+       held by the columns alone and releases at the end of the text. Anything
+       appended after this — a gallery band — starts cleanly below. */
+    .trip-split.is-split .trip-columns {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+        gap: 64px;
         align-items: start;
     }
 
@@ -1998,34 +2004,57 @@ a.card-link { cursor: pointer; }
     /* A gallery spans both columns as its own band beneath the story. It
        cannot sit beside the sticky photo column without running into it. */
     .trip-split.is-split > .wp-block-gallery {
-        grid-column: 1 / -1;
         width: 100%;
         max-width: none;
-        margin: 72px 0 0;
+        margin: 76px 0 0;
     }
 
-    /* Give the tiles room to breathe at full width */
-    .trip-split.is-split > .wp-block-gallery.has-nested-images {
-        gap: 14px;
-    }
-
-    .trip-split.is-split > .wp-block-gallery.has-nested-images figure.wp-block-image {
-        margin: 0;
-    }
-
-    .trip-split.is-split > .wp-block-gallery.has-nested-images figure.wp-block-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
-
-    .trip-split.is-split > .wp-block-gallery.has-nested-images figure.wp-block-image {
+    /* ---- Rolling photo strip (Gallery block) ---- */
+    .trip-split.is-split > .wp-block-gallery.pw-roll {
+        display: block;
+        gap: 0;
         overflow: hidden;
     }
 
-    .trip-split.is-split > .wp-block-gallery.has-nested-images figure.wp-block-image:hover img {
-        transform: scale(1.04);
+    .pw-roll .pw-roll-viewport { overflow: hidden; width: 100%; }
+
+    .pw-roll .pw-roll-track {
+        display: flex;
+        gap: 14px;
+        width: max-content;
+        animation: pwRoll var(--pw-roll-duration, 42s) linear infinite;
+        will-change: transform;
+    }
+
+    /* Pause so a moving photo can actually be clicked */
+    .pw-roll:hover .pw-roll-track,
+    .pw-roll:focus-within .pw-roll-track { animation-play-state: paused; }
+
+    @keyframes pwRoll {
+        from { transform: translateX(0); }
+        to   { transform: translateX(calc(-1 * var(--pw-roll-shift, 50%))); }
+    }
+
+    /* Specific enough to beat core's .wp-block-image.alignfull img rule */
+    .trip-split.is-split .pw-roll .pw-roll-track figure.wp-block-image {
+        margin: 0;
+        flex: 0 0 auto;
+        height: 260px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .trip-split.is-split .pw-roll .pw-roll-track figure.wp-block-image img {
+        height: 100%;
+        width: auto;
+        max-width: none;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .trip-split.is-split .pw-roll .pw-roll-track figure.wp-block-image:hover img {
+        transform: scale(1.05);
     }
 
     /* Captions sit over the foot of the photo rather than below it */
@@ -2046,4 +2075,12 @@ a.card-link { cursor: pointer; }
 
 @media (prefers-reduced-motion: reduce) {
     .trip-gallery figure { transition: none; }
+}
+
+/* Reduced motion: no rolling. The strip becomes a normal side-scroller and the
+   duplicate tiles are hidden, so every photo is still reachable. */
+@media (prefers-reduced-motion: reduce) {
+    .pw-roll .pw-roll-track { animation: none; }
+    .pw-roll .pw-roll-viewport { overflow-x: auto; }
+    .pw-roll .pw-roll-clone { display: none; }
 }
