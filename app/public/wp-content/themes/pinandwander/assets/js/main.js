@@ -118,31 +118,70 @@
             }
         }
 
-        var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            // Fire a little before the element is fully on screen.
-            rootMargin: '0px 0px -8% 0px',
-            threshold: 0.08
-        });
-
         // Reveal is for content you scroll TO. Anything already on screen at
         // load is shown at once with the transition suppressed, so headings
         // never fade in under the visitor's eyes on arrival.
         var viewportH = window.innerHeight || document.documentElement.clientHeight;
+        var pending = [];
 
         for (var n = 0; n < revealEls.length; n++) {
             if (revealEls[n].getBoundingClientRect().top < viewportH) {
                 revealEls[n].classList.add('is-instant', 'is-visible');
             } else {
-                observer.observe(revealEls[n]);
+                pending.push(revealEls[n]);
             }
         }
+        if (!pending.length) return;
+
+        // An element counts as reached once its top edge is inside the
+        // viewport. Deliberately not a percentage of the element: a share of
+        // a 3300px article body would demand hundreds of pixels on screen
+        // before firing, so the reader scrolls into blank space and the text
+        // snaps in late.
+        function sweep() {
+            ticking = false;
+            var limit = (window.innerHeight || 0) * 0.94;
+            for (var i = pending.length - 1; i >= 0; i--) {
+                if (pending[i].getBoundingClientRect().top < limit) {
+                    pending[i].classList.add('is-visible');
+                    if (observer) observer.unobserve(pending[i]);
+                    pending.splice(i, 1);
+                }
+            }
+            if (!pending.length) {
+                window.removeEventListener('scroll', onScroll);
+                window.removeEventListener('resize', onScroll);
+            }
+        }
+
+        var ticking = false;
+        function onScroll() {
+            if (ticking) return;
+            ticking = true;
+            // A timer rather than requestAnimationFrame: rAF is tied to the
+            // compositor and stops firing when the page is not being painted,
+            // which would strand the sweep. The flag coalesces a burst of
+            // scroll events into one pass.
+            setTimeout(sweep, 0);
+        }
+
+        // IntersectionObserver does the work cheaply; the scroll sweep above
+        // is the guarantee, so nothing can end up stranded at opacity 0.
+        var observer = new IntersectionObserver(function (entries) {
+            for (var i = 0; i < entries.length; i++) {
+                if (!entries[i].isIntersecting) continue;
+                entries[i].target.classList.add('is-visible');
+                observer.unobserve(entries[i].target);
+                var at = pending.indexOf(entries[i].target);
+                if (at > -1) pending.splice(at, 1);
+            }
+        }, { rootMargin: '0px 0px -6% 0px', threshold: 0 });
+
+        pending.forEach(function (el) { observer.observe(el); });
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        sweep();
     })();
 
     // The hero crossfade is pure CSS (see pinandwander_hero_inline_css in
