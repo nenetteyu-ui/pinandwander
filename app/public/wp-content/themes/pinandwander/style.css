@@ -713,7 +713,8 @@ a.card-link { cursor: pointer; }
     font-style: italic;
     font-size: 0.82rem;
     color: rgba(255, 255, 255, 0.52);
-    max-width: 200px;
+    /* No 200px cap: the tagline is meant to sit on one line */
+    max-width: none;
     line-height: 1.55;
 }
 

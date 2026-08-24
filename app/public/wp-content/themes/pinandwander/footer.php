@@ -8,7 +8,7 @@
                     <?php echo pinandwander_logo_mark( 'footer-logo-mark' ); ?>
                     <span class="footer-logo-text">Pin <span class="amp">&amp;</span> Wander</span>
                 </a>
-                <p class="footer-tagline">Pin the dream. Wander the world.<br>Repeat.</p>
+                <p class="footer-tagline">Pin the dream. Wander the world. Repeat</p>
 
                 <?php
                 // Coastline's IATA number is not published publicly — fill this

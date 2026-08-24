@@ -32,7 +32,7 @@
         <div class="hero-content">
             <p class="hero-eyebrow">Travel Advisory &amp; Photography</p>
             <h1 class="hero-title">Pin <span class="amp">&amp;</span> Wander</h1>
-            <p class="hero-tagline">Pin the dream, wander the world, and repeat.</p>
+            <p class="hero-tagline">Pin the dream, wander the world, and repeat</p>
             <div class="hero-actions">
                 <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn btn-primary">
                     <?php esc_html_e( 'Work With Me', 'pinandwander' ); ?>
