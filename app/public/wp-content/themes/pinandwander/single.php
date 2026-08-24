@@ -36,15 +36,27 @@
                 <p class="trip-standfirst reveal"><?php echo esc_html( get_the_excerpt() ); ?></p>
             <?php endif; ?>
 
-            <div class="prose reveal">
-                <?php
-                the_content();
+            <?php
+            /*
+             * On wide screens main.js lifts the photos out of .prose and into
+             * .trip-gallery, which then sticks beside the text. Below 1024px
+             * they are left exactly where they are, in reading order.
+             */
+            ?>
+            <div class="trip-split">
+                <div class="trip-textcol">
+                    <div class="prose reveal">
+                        <?php
+                        the_content();
 
-                wp_link_pages( array(
-                    'before' => '<nav class="trip-pagelinks">',
-                    'after'  => '</nav>',
-                ) );
-                ?>
+                        wp_link_pages( array(
+                            'before' => '<nav class="trip-pagelinks">',
+                            'after'  => '</nav>',
+                        ) );
+                        ?>
+                    </div>
+                </div>
+                <aside class="trip-gallery"></aside>
             </div>
 
             <footer class="trip-footer reveal">

@@ -1924,3 +1924,85 @@ a.card-link { cursor: pointer; }
         transition: none;
     }
 }
+
+/* ============================================================
+   TRIP STORY — TEXT LEFT, PHOTOS RIGHT
+   Below 1024px nothing here applies: the photos stay inline in
+   reading order and the story reads as a single column.
+   ============================================================ */
+@media (min-width: 1024px) {
+    .trip-split.is-split {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+        gap: 64px;
+        max-width: 1360px;
+        margin: 0 auto;
+        padding: 0 48px;
+        align-items: start;
+    }
+
+    /* Inside a column, the breakout grid has nothing to break out of. */
+    .trip-split.is-split .prose {
+        display: block;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .trip-split.is-split .prose > .alignwide,
+    .trip-split.is-split .prose > .alignfull {
+        width: auto;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    /* The photo column holds its place while the text scrolls past it. */
+    .trip-gallery {
+        position: sticky;
+        top: calc(var(--nav-height) + 28px);
+        height: calc(100vh - var(--nav-height) - 90px);
+        min-height: 460px;
+        overflow: hidden;
+        background: var(--color-green);
+    }
+
+    .trip-gallery figure {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        opacity: 0;
+        transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .trip-gallery figure.is-current { opacity: 1; }
+
+    /* Scoped through .trip-split.is-split on purpose. WordPress core ships
+       `.wp-block-image.alignfull img { height: auto }` — two classes, which
+       outranks a plain `.trip-gallery img`, so a full-width photo would only
+       fill the column's width and leave the rest empty. */
+    .trip-split.is-split .trip-gallery img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Captions sit over the foot of the photo rather than below it */
+    .trip-gallery figcaption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+        padding: 42px 24px 18px;
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
+        letter-spacing: 0.04em;
+        color: rgba(255, 255, 255, 0.92);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .trip-gallery figure { transition: none; }
+}

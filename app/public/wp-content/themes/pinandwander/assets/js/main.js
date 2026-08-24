@@ -148,4 +148,79 @@
     // The hero crossfade is pure CSS (see pinandwander_hero_inline_css in
     // functions.php) so it starts on paint and never stalls behind a
     // throttled background timer.
+
+    // ── Trip story: photo column ──────────────────────────────────────
+    // On wide screens the story's photos move into a sticky column beside the
+    // text, and cross-fade as you read past them. Below the breakpoint they
+    // stay inline, in reading order. This runs from a classic footer script,
+    // which executes before deferred module scripts, so the photos are in
+    // place before WordPress hydrates its lightbox on them.
+    (function () {
+        var split = document.querySelector('.trip-split');
+        if (!split) return;
+
+        var prose   = split.querySelector('.prose');
+        var gallery = split.querySelector('.trip-gallery');
+        if (!prose || !gallery) return;
+
+        var figures = [];
+        var kids = prose.children;
+        for (var i = 0; i < kids.length; i++) {
+            if (kids[i].tagName === 'FIGURE') figures.push(kids[i]);
+        }
+        // One photo has nothing to cross-fade to; none has nothing to move.
+        if (figures.length < 2) return;
+
+        // Bookmark each photo's spot so it can go back when the screen narrows.
+        var slots = figures.map(function (fig) {
+            var slot = document.createComment('pw-figure');
+            fig.parentNode.insertBefore(slot, fig);
+            return slot;
+        });
+
+        var wide = window.matchMedia('(min-width: 1024px)');
+        var moved = false;
+        var current = -1;
+
+        function show(index) {
+            if (index === current) return;
+            current = index;
+            for (var i = 0; i < figures.length; i++) {
+                figures[i].classList.toggle('is-current', i === index);
+            }
+        }
+
+        function update() {
+            if (!moved) return;
+            var box = prose.getBoundingClientRect();
+            var viewH = window.innerHeight;
+            // How far the reader has travelled through the text, 0 → 1.
+            var span = Math.max(box.height - viewH * 0.5, 1);
+            var read = Math.min(Math.max(viewH * 0.45 - box.top, 0), span);
+            show(Math.min(figures.length - 1, Math.floor(read / span * figures.length)));
+        }
+
+        function apply() {
+            if (wide.matches && !moved) {
+                figures.forEach(function (fig) { gallery.appendChild(fig); });
+                moved = true;
+                split.classList.add('is-split');
+                current = -1;
+                update();
+            } else if (!wide.matches && moved) {
+                figures.forEach(function (fig, i) {
+                    slots[i].parentNode.insertBefore(fig, slots[i]);
+                    fig.classList.remove('is-current');
+                });
+                moved = false;
+                split.classList.remove('is-split');
+            }
+        }
+
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', function () { apply(); update(); });
+        if (wide.addEventListener) wide.addEventListener('change', apply);
+        else if (wide.addListener) wide.addListener(apply);
+        apply();
+    })();
 })();
