@@ -197,10 +197,9 @@
                     <?php if ( $pw_coastline_iata ) : ?>
                         <span class="affiliation-meta">IATA <?php echo esc_html( $pw_coastline_iata ); ?></span>
                     <?php endif; ?>
-                </li>
-                <li>
-                    <span class="affiliation-name">Virtuoso</span>
-                    <span class="affiliation-meta"><?php esc_html_e( 'Travel Network', 'pinandwander' ); ?></span>
+                    <span class="affiliation-note">
+                        <?php esc_html_e( 'Affiliated with the Virtuoso travel network', 'pinandwander' ); ?>
+                    </span>
                 </li>
             </ul>
         </div>
