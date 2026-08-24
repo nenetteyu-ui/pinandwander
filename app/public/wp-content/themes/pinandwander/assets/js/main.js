@@ -205,7 +205,12 @@
         var figures = [];
         var kids = prose.children;
         for (var i = 0; i < kids.length; i++) {
-            if (kids[i].tagName === 'FIGURE') figures.push(kids[i]);
+            if (kids[i].tagName !== 'FIGURE') continue;
+            // A Gallery block is itself one <figure> wrapping many images.
+            // Moving it into the photo column would stack a whole grid into a
+            // single slot, so galleries stay in the flow of the story.
+            if (kids[i].classList.contains('wp-block-gallery')) continue;
+            figures.push(kids[i]);
         }
         // One photo has nothing to cross-fade to; none has nothing to move.
         if (figures.length < 2) return;
