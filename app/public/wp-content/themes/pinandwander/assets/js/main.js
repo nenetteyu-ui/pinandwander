@@ -245,6 +245,11 @@
 
             block.appendChild(viewport);
             block.classList.add('pw-roll');
+            // "Crop images" in the Gallery block forces every tile to a uniform
+            // box and crops to fill it. In a single-height strip that chops the
+            // tops and bottoms off, so the strip sizes tiles by height instead
+            // and lets each keep its own proportions.
+            block.classList.remove('is-cropped');
 
             // Shift by exactly one set, gaps included, so it loops invisibly.
             function measure() {

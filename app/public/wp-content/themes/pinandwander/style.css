@@ -2035,26 +2035,36 @@ a.card-link { cursor: pointer; }
         to   { transform: translateX(calc(-1 * var(--pw-roll-shift, 50%))); }
     }
 
-    /* Specific enough to beat core's .wp-block-image.alignfull img rule */
-    .trip-split.is-split .pw-roll .pw-roll-track figure.wp-block-image {
+    /* Tiles are sized by HEIGHT only; width follows each photo's own
+       proportions, so nothing is cropped. Selectors are deliberately long:
+       core's gallery and alignfull rules would otherwise force a uniform
+       width and crop the tops and bottoms to fill it. */
+    .trip-split.is-split .pw-roll .pw-roll-track figure.wp-block-image:not(#pw) {
         margin: 0;
         flex: 0 0 auto;
-        height: 260px;
+        width: auto;
+        max-width: none;
+        height: var(--pw-roll-h, 260px);
         overflow: hidden;
         position: relative;
     }
 
-    .trip-split.is-split .pw-roll .pw-roll-track figure.wp-block-image img {
-        height: 100%;
+    .trip-split.is-split .pw-roll .pw-roll-track figure.wp-block-image img:not(#pw) {
+        height: var(--pw-roll-h, 260px);
         width: auto;
         max-width: none;
-        object-fit: cover;
+        object-fit: contain;
         display: block;
         transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
     }
 
     .trip-split.is-split .pw-roll .pw-roll-track figure.wp-block-image:hover img {
-        transform: scale(1.05);
+        transform: scale(1.04);
+    }
+
+    /* A portrait photo would otherwise stretch the strip very wide */
+    .trip-split.is-split .pw-roll .pw-roll-track figure.wp-block-image {
+        max-width: 46vw;
     }
 
     /* Captions sit over the foot of the photo rather than below it */
