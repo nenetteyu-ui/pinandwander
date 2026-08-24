@@ -9,6 +9,29 @@
                     <span class="footer-logo-text">Pin <span class="amp">&amp;</span> Wander</span>
                 </a>
                 <p class="footer-tagline">Pin the dream. Wander the world.<br>Repeat.</p>
+
+                <?php
+                // Coastline's IATA number is not published publicly — fill this
+                // in and the line appears. Left empty, it does not render.
+                $pw_coastline_iata = '';
+                ?>
+                <div class="footer-affiliations">
+                    <p class="footer-affil-intro">
+                        <?php esc_html_e( 'An independent travel advisory company, affiliated with', 'pinandwander' ); ?>
+                    </p>
+                    <ul class="footer-affil-list">
+                        <li><span class="footer-affil-name">Travels with Tesa</span></li>
+                        <li>
+                            <span class="footer-affil-name">Coastline Travel Advisors</span>
+                            <?php if ( $pw_coastline_iata ) : ?>
+                                <span class="footer-affil-meta">IATA <?php echo esc_html( $pw_coastline_iata ); ?></span>
+                            <?php endif; ?>
+                            <span class="footer-affil-meta">
+                                <?php esc_html_e( 'Affiliated with the Virtuoso travel network', 'pinandwander' ); ?>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <nav aria-label="<?php esc_attr_e( 'Footer', 'pinandwander' ); ?>">
