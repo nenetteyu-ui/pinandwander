@@ -2126,3 +2126,74 @@ a.card-link { cursor: pointer; }
     .pw-roll .pw-roll-viewport { overflow-x: auto; }
     .pw-roll .pw-roll-clone { display: none; }
 }
+
+/* ============================================================
+   AFFILIATIONS (front page, above the footer)
+   ============================================================ */
+.section-affiliations {
+    background: var(--color-light);
+    padding: 96px 48px 110px;
+    border-top: 1px solid rgba(16, 35, 26, 0.1);
+}
+
+.affiliations-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.affiliations-lede {
+    font-family: var(--font-serif);
+    font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+    line-height: 1.4;
+    color: var(--color-dark);
+    margin: 18px auto 46px;
+    max-width: 30ch;
+    text-wrap: balance;
+}
+
+.affiliations-lede .amp {
+    color: var(--color-warm-dk);
+    font-style: italic;
+}
+
+.affiliations-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 20px 64px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.affiliations-list li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.affiliation-name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 2.1vw, 1.5rem);
+    font-weight: 500;
+    /* The confirmed sea green for type on light backgrounds — see CLAUDE.md */
+    color: #1d4a34;
+    white-space: nowrap;
+}
+
+.affiliation-meta {
+    font-family: var(--font-sans);
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}
+
+@media (max-width: 768px) {
+    .section-affiliations { padding: 68px 24px 78px; }
+    .affiliations-list { gap: 30px 36px; }
+}

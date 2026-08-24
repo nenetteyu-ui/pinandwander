@@ -172,6 +172,40 @@
         </div>
     </section>
 
+    <!-- ================================================
+         AFFILIATIONS
+         ================================================ -->
+    <?php
+    // Coastline's IATA number is not published anywhere public — fill this in
+    // and the line below appears. Left empty, it simply does not render.
+    $pw_coastline_iata = '';
+    ?>
+    <section class="section-affiliations" aria-labelledby="affiliations-title">
+        <div class="affiliations-inner reveal">
+            <span class="eyebrow" id="affiliations-title"><?php esc_html_e( 'Affiliations', 'pinandwander' ); ?></span>
+
+            <p class="affiliations-lede">
+                Pin <span class="amp">&amp;</span> Wander is an independent travel advisory company.
+            </p>
+
+            <ul class="affiliations-list">
+                <li>
+                    <span class="affiliation-name">Travels with Tesa</span>
+                </li>
+                <li>
+                    <span class="affiliation-name">Coastline Travel Advisors</span>
+                    <?php if ( $pw_coastline_iata ) : ?>
+                        <span class="affiliation-meta">IATA <?php echo esc_html( $pw_coastline_iata ); ?></span>
+                    <?php endif; ?>
+                </li>
+                <li>
+                    <span class="affiliation-name">Virtuoso</span>
+                    <span class="affiliation-meta"><?php esc_html_e( 'Travel Network', 'pinandwander' ); ?></span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
 </main>
 
 <?php get_footer(); ?>
