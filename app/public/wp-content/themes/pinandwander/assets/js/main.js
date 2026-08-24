@@ -225,7 +225,13 @@
             if (index === current) return;
             current = index;
             for (var i = 0; i < figures.length; i++) {
-                figures[i].classList.toggle('is-current', i === index);
+                var on = (i === index);
+                figures[i].classList.toggle('is-current', on);
+                // Keep the hidden photos out of the tab order and away from
+                // screen readers — they are stacked on the visible one, so
+                // without this a keyboard user would meet every photo at once.
+                if (on) figures[i].removeAttribute('inert');
+                else figures[i].setAttribute('inert', '');
             }
         }
 

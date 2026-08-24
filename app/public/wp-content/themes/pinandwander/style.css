@@ -1972,9 +1972,17 @@ a.card-link { cursor: pointer; }
         margin: 0;
         opacity: 0;
         transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+        /* The photos are stacked on the same spot. Without this the invisible
+           ones still swallow clicks — and the last in the DOM sits on top — so
+           clicking the photo you can see opens a different one in the
+           lightbox. Only the visible photo may be clicked. */
+        pointer-events: none;
     }
 
-    .trip-gallery figure.is-current { opacity: 1; }
+    .trip-gallery figure.is-current {
+        opacity: 1;
+        pointer-events: auto;
+    }
 
     /* Scoped through .trip-split.is-split on purpose. WordPress core ships
        `.wp-block-image.alignfull img { height: auto }` — two classes, which
